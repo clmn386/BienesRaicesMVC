@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
-        'name' => 'clmn3/practicas_backend',
+        'reference' => '3b8aa592d918436b0268702a9257c5b48ee41d26',
+        'name' => 'clmn3/mvc',
         'dev' => true,
     ),
     'versions' => array(
-        'clmn3/practicas_backend' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+        'clmn3/mvc' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '3b8aa592d918436b0268702a9257c5b48ee41d26',
             'dev_requirement' => false,
         ),
         'guzzlehttp/psr7' => array(
