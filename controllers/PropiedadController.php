@@ -10,7 +10,8 @@ class PropiedadController{
     //este metodo es llamada desde /public/build/index.php
     public static function index(Router $router) {
         $propiedades = Propiedad::all();
-        $resultado = null;
+
+        $resultado = $_GET['resultado'] ?? null;
 
         $router->render('propiedades/admin',[
            'propiedades' => $propiedades,
@@ -66,8 +67,48 @@ class PropiedadController{
          ]);
     }
 
-    public static function actualizar() {
-        echo "Actualizando ... ";
+    public static function actualizar(Router $router) {
+        $id = validarRedireccionar('/admin');
+
+        $propiedad = Propiedad::find($id);
+        $vendedores = Vendedor::all();
+        $errores = Propiedad::getErrores();
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        
+            $args = $_POST['propiedad'];
+            
+            $propiedad->sincronizar($args);
+            //Validacion
+            $ignore_img=true;
+            $errores = $propiedad->validar($ignore_img);
+            
+            //Subida de Archivos
+            $formato = $propiedad->FormatoImagen();
+            
+            $nombreImagen = md5( uniqid( rand(), true) ). $formato;
+    
+    
+            //Validacion de imagen y archivar en carpeta
+            if ($_FILES['propiedad']['tmp_name']['imagen']) {
+                $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800,600);
+                $propiedad->setImagen($nombreImagen);
+    
+                if (empty($errores)){
+                    if ($_FILES['propiedad']['tmp_name']['imagen']) {
+                        $image->save(CARPETAS_IMAGENES . $nombreImagen);
+                    }
+                    $propiedad->guardar();
+                }
+            }
+    
+        }
+
+        $router->render('propiedades/actualizar',[
+            'propiedad' => $propiedad,
+            'errores' => $errores,
+            'vendedores' => $vendedores
+        ]);
     }
 }
 

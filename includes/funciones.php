@@ -57,4 +57,12 @@ function mostrarNotificacion($codigo) {
     return $mensaje;
 }
 
-//colocar validacion de formato en este archivo.
+function validarRedireccionar(string $url) {
+    $id = $_GET['id'];
+    $id = filter_var($id, FILTER_VALIDATE_INT);
+
+    if(!$id) {
+        header("Location: ${url}");
+    }
+    return $id;
+}

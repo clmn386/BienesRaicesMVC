@@ -1,5 +1,5 @@
 <main class="contenedor seccion">
-        <h1>Crear</h1>
+        <h1>Actualizar Propiedad</h1>
 
         <?php foreach($errores as $error): ?>
             <div class="alerta error">
