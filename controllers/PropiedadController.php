@@ -110,6 +110,20 @@ class PropiedadController{
             'vendedores' => $vendedores
         ]);
     }
+
+    public static function eliminar() {
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+            $tipo = $_POST['tipo'];
+            $id = filter_var($id, FILTER_VALIDATE_INT);
+    
+            if($id && validarTipo($tipo)){
+                $propiedad = Propiedad::find($id);
+                $propiedad-> eliminar();
+            }
+        }
+    }
 }
 
 ?>      
