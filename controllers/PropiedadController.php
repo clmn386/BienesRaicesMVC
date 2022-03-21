@@ -192,6 +192,27 @@ class PropiedadController{
             }
         }
     }
+
+    public static function inicio(Router $router) {
+
+        $incluir =  incluirTemplate('header', $inicio = true); 
+        
+        $propiedades = Propiedad::get(3);
+
+       /*  if($_SERVER['SCRIPT_NAME'] === '/anuncios.php'){
+            $propiedades = Propiedad::all();
+            }else{
+                $propiedades = Propiedad::get(3);
+            } */
+        
+        $router->render('home/inicio',[
+            'incluir' => $incluir,
+            'propiedades' => $propiedades,
+
+
+         ]);
+
+    }
 }
 
 ?>      
