@@ -10,11 +10,13 @@ class PropiedadController{
     //este metodo es llamada desde /public/build/index.php
     public static function index(Router $router) {
         $propiedades = Propiedad::all();
+        $vendedores = Vendedor::all();
 
         $resultado = $_GET['resultado'] ?? null;
 
         $router->render('propiedades/admin',[
            'propiedades' => $propiedades,
+           'vendedores' => $vendedores,
            'resultado' => $resultado
         ]);// este metodo manda a llamar a $router que hace referencia a la instanciada en /public/build/index.php, y le pasamos a render una direccion como variable al metodo.
     }
@@ -142,14 +144,53 @@ class PropiedadController{
             if(empty($errores)){
                 $vendedor->guardar();
             }
-        
         }
-
         $router->render('vendedores/crear',[
             'vendedor' => $vendedor,
             'errores' => $errores,
 
         ]);
+    }
+
+    public static function actualizarVendedor(Router $router) {
+        $id = validarRedireccionar('/admin');
+
+            $vendedor = Vendedor::find($id);
+            //Arreglo con mensaje de errores
+            $errores = Vendedor::getErrores();
+
+            if($_SERVER['REQUEST_METHOD']==='POST') {
+                // asignar valor
+                $args = $_POST['vendedor'];
+                //sincronizar Obj en memoria con lo que usuario escribio
+                $vendedor->sincronizar($args);
+                // validacion
+                $errores = $vendedor->validar();
+            
+                if(empty($errores)){
+                    $vendedor->guardar();
+                }
+            }
+        $router->render('vendedores/actualizar',[
+            'vendedor' => $vendedor,
+            'errores' => $errores,
+
+        ]);
+
+    }
+
+    public static function eliminarVendedor(Router $router) {
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+            $tipo = $_POST['tipo'];
+            $id = filter_var($id, FILTER_VALIDATE_INT);
+    
+            if ($tipo==="vendedor") {
+                $propiedad = Vendedor::find($id);
+                $propiedad-> eliminar();
+            }
+        }
     }
 }
 
