@@ -124,6 +124,33 @@ class PropiedadController{
             }
         }
     }
+
+    public static function crearVendedor(Router $router) {
+
+        $vendedor = new Vendedor;
+        
+        $errores = Vendedor::getErrores();
+        
+        if($_SERVER['REQUEST_METHOD']==='POST') {
+            // Nueva Instacia
+            $vendedor = new Vendedor($_POST['vendedor']);
+        
+            //Validar que no hay campos vacios
+            $errores = $vendedor->validar();
+            
+            //no hay errores
+            if(empty($errores)){
+                $vendedor->guardar();
+            }
+        
+        }
+
+        $router->render('vendedores/crear',[
+            'vendedor' => $vendedor,
+            'errores' => $errores,
+
+        ]);
+    }
 }
 
 ?>      
