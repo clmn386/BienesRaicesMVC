@@ -70,6 +70,6 @@
     <p class="copyright">Todos los derechos Reservados <?php echo date('Y');?> &copy; Carlos L Mata</p>
 </footer>
 
-    <script src="../build/js/bundle.js"></script>
+    <script src="../build/js/bundle.min.js"></script>
 </body>
 </html>

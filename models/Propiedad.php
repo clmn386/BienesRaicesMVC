@@ -62,9 +62,9 @@ class Propiedad extends ActiveRecord {
             self::$errores[] = 'elige un vendedor';
         }
         //valida falta de imagen o formato erroneo.
-        if(self::FormatoImagen()===false && !$ignore_img){
+         if(self::FormatoImagen()===false && !$ignore_img){
             self::$errores[] = 'falta imagen o tiene error de formato subido';
-        } 
+        }   
        
         return self::$errores;
     }

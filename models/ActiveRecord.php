@@ -109,14 +109,14 @@ class ActiveRecord {
     // Funcion validacion formato de imagen
     public static function FormatoImagen(){ // Manera rudimentaria de comprobar tanto el formato correcto o envia mensaje de error en funcion validar().
         
-        if($_FILES['propiedad']['type']['imagen']==='image/png'){
-            return '.png'; 
-        }elseif($_FILES['propiedad']['type']['imagen']==='image/jpeg'){
-            return '.jpeg'; 
-        }else{
-            return false;
-        }
-    }
+            if($_FILES['propiedad']['type']['imagen']==='image/png'){
+                return '.png'; 
+            }elseif($_FILES['propiedad']['type']['imagen']==='image/jpeg'){
+                return '.jpeg'; 
+            }else{
+                return false;
+            }
+        } 
 
     public function setImagen($imagen) {
         // Eliminar imagen previa
@@ -131,6 +131,7 @@ class ActiveRecord {
     
     //Eliminar archivo
     public function borrarImagen() {
+
         $existeArchivo = file_exists(CARPETAS_IMAGENES . $this->imagen);
 
         if($existeArchivo) {
