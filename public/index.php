@@ -2,19 +2,21 @@
 require_once __DIR__. '/../includes/app.php';
 use MVC\Router;
 use Controllers\PropiedadController;
+use Controllers\VendedorController;
+use Controllers\PaginasController;
 
 
 $router = new Router();
 
-// " debuggear(PropiedadController::class); " <- esto nos da el namespace donde se encuentra esa funcion. Podremos identificar en que clase de encuantra el metodo.
-
-$router->get('/home/inicio', [PropiedadController::class, 'inicio']);
-$router->get('/home/nosotros', [PropiedadController::class, 'nosotros']);
-$router->get('/home/anuncios', [PropiedadController::class, 'anuncios']);
-$router->get('/home/contacto', [PropiedadController::class, 'contacto']);
-$router->get('/home/blog', [PropiedadController::class, 'blog']);
-
-$router->get('/', [PropiedadController::class, 'index']);
+/* <-------------------(PUBLICA)--------------------> */
+$router->get('/', [PaginasController::class, 'index']);
+$router->get('/nosotros', [PaginasController::class, 'nosotros']);
+$router->get('/propiedades', [PaginasController::class, 'propiedades']);
+$router->get('/propiedad', [PaginasController::class, 'propiedad']);
+$router->get('/blog', [PaginasController::class, 'blog']);
+$router->get('/entrada', [PaginasController::class, 'entrada']);
+$router->get('/contacto', [PaginasController::class, 'contacto']);
+$router->post('/contacto', [PaginasController::class, 'contacto']);
 
 /* <-------------------(ADMIN)--------------------> */
 // Admin Index
@@ -32,7 +34,6 @@ $router->get('/vendedores/actualizar', [VendedorController::class, 'actualizar']
 $router->post('/vendedores/crear', [VendedorController::class, 'crear']);
 $router->post('/vendedores/actualizar', [VendedorController::class, 'actualizar']);
 $router->post('/vendedores/eliminar', [VendedorController::class, 'eliminar']);
-
 
 
 $router->comprobarRutas();
