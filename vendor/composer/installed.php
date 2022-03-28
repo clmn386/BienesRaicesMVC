@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '3b8aa592d918436b0268702a9257c5b48ee41d26',
+        'reference' => 'dcff1667132a59c28a5047ff8e7419632ae1209e',
         'name' => 'clmn3/mvc',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '3b8aa592d918436b0268702a9257c5b48ee41d26',
+            'reference' => 'dcff1667132a59c28a5047ff8e7419632ae1209e',
             'dev_requirement' => false,
         ),
         'guzzlehttp/psr7' => array(
@@ -35,6 +35,15 @@
             'install_path' => __DIR__ . '/../intervention/image',
             'aliases' => array(),
             'reference' => '744ebba495319501b873a4e48787759c72e3fb8c',
+            'dev_requirement' => false,
+        ),
+        'phpmailer/phpmailer' => array(
+            'pretty_version' => 'v6.6.0',
+            'version' => '6.6.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpmailer/phpmailer',
+            'aliases' => array(),
+            'reference' => 'e43bac82edc26ca04b36143a48bde1c051cfd5b1',
             'dev_requirement' => false,
         ),
         'psr/http-factory' => array(
