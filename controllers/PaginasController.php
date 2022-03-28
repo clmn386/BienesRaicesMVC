@@ -61,7 +61,8 @@ class PaginasController{
     public static function contacto(Router $router){
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            /* debuggear($_POST); */
+            $respuesta = $_POST['contacto'];
+            debuggear($respuesta); 
             //crear una instancia de PHPMailer
             $mail = new PHPMailer();
 
@@ -76,7 +77,7 @@ class PaginasController{
 
             //configurar el contenido del mail
             $mail->setFrom('admin@bienesraices.com');
-            $mail->addAddress('admin@bienesraices.com, BienesRaices.com');
+            $mail->addAddress('admin@bienesraices.com', 'BienesRaices.com');
             $mail->Subject = 'Tienes un nuevo Email';
 
             // Habilitar Html
@@ -84,8 +85,19 @@ class PaginasController{
             $mail->CharSet = 'utf-8';
 
             // Definir COntenido
-            $contenido = '<html> <p> Tienes un nuevo mensaje </p> </html>';
-            
+            $contenido = '<html>';
+            $contenido .= '<p>Tienes un nuevo mensaje: </p><br>';
+            $contenido .= '<p>Nombre: '.$respuesta['nombre'].'</p><br>';
+            $contenido .= '<p>Correo: '.$respuesta['email'] .'</p><br>';
+            $contenido .= '<p>Telefono: '.$respuesta['telefono'] .'</p><br>';
+            $contenido .= '<p>Mensaje: '.$respuesta['mensaje'] .'</p><br>';
+            $contenido .= '<p>Vende o Compra: '.$respuesta['tipo'] .'</p><br>';
+            $contenido .= '<p>Precio o Presupuesto: $.-'.$respuesta['precio'] .'</p><br>';
+            $contenido .= '<p>Prefiere ser contactado: '.$respuesta['contacto'] .'</p><br>';
+            $contenido .= '<p>Fecha de contacto: '.$respuesta['fecha'] .'</p><br>';
+            $contenido .= '<p>Hora: '.$respuesta['hora'] .'</p><br>';
+            $contenido .= '</html>';
+             
             $mail->Body = $contenido;
             $mail->AltBody = 'Mensaje alternativo al html';
             
@@ -94,9 +106,9 @@ class PaginasController{
             /*             debuggear($mail); */
             if($mail->send()){
                 echo 'Mensaje enviado';
-            }else{
-                echo 'ERROR no se pudo enviar el email...';
-                debuggear($_POST);
+            }
+            if(!$mail->send()){
+                echo 'ERROR no se pudo enviar el email 234234...';
             }
         } 
         $router->render('paginas/contacto',  [

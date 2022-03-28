@@ -31,14 +31,46 @@ function darkMode() {
     });
 }
 
+
 function eventListeners() {
     const mobileMenu = document.querySelector('.mobile-menu');
 
-    mobileMenu.addEventListener('click', navegacionResponsive);
+    mobileMenu.addEventListener('click', navegacionResponsive); 
+
+    // Muestra campos condicionales
+
+    const metodoContacto = document.querySelectorAll('input[name="contacto[contacto]"]');
+    console.log(metodoContacto);
+     metodoContacto.forEach(input => input.addEventListener('click', mostrarMetodosContacto))
 }
 
 function navegacionResponsive() {
     const navegacion = document.querySelector('.navegacion');
 
     navegacion.classList.toggle('mostrar')
+}
+
+function mostrarMetodosContacto(e) {
+    const contactoDiv = document.querySelector('#contacto');
+
+    if(e.target.value === 'telefono') {
+        contactoDiv.innerHTML = `
+        <br>
+        <input type="tel" placeholder="Tu Teléfono" id="telefono" name="contacto[telefono]">
+
+        <p>Si eligió teléfono, elija la fecha y la hora</p>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="contacto[fecha]" >
+
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" min="09:00" max="18:00" name="contacto[hora]" >
+        `;
+    }else{
+        contactoDiv.innerHTML = `
+        <br>
+        <input type="email" placeholder="Tu Email" id="email" name ="contacto[email]">
+        `;
+    }
+    console.log(e);
 }
